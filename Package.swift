@@ -34,7 +34,7 @@ let package = Package(
             dependencies: [
                 .product(name: "FlowBase", package: "FlowBase"),
                 .product(name: "FlowViz", package: "FlowViz"),
-                .product(name: "Zipfoundation", package: "Zipfoundation"),
+                .product(name: "ZIPFoundation", package: "ZIPFoundation"),
                 .product(name: "Detailer", package: "SwiftDetailer"),
                 .product(name: "DetailerMenu", package: "SwiftDetailerMenu"),
                 .product(name: "Tabler", package: "SwiftTabler"),
