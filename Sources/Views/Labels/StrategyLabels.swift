@@ -26,11 +26,11 @@ public struct StrategyTitleLabel: View {
         self.strategyKey = strategyKey
         self.withID = withID
     }
-    
+
     public var body: some View {
         Text(MStrategy.getStrategyTitleID(strategyKey, strategyMap, withID: withID) ?? "")
     }
-    
+
     private var strategyMap: StrategyMap {
         if ax.strategyMap.count > 0 {
             return ax.strategyMap

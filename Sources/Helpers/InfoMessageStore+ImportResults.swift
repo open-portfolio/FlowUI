@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import Foundation
 
 import FlowBase
@@ -18,11 +17,9 @@ public extension InfoMessageStore {
         guard results.count > 0 else { return }
         let importMessageStrs = BaseModel.ImportResult.getImportDetails(results)
         if importMessageStrs.count > 0 {
-            self.add("Imported: \(importMessageStrs.joined(separator: "; "))", modelID: modelID, schemaName: nil)
+            add("Imported: \(importMessageStrs.joined(separator: "; "))", modelID: modelID, schemaName: nil)
         }
         let warnings = BaseModel.ImportResult.getImportWarnings(results)
-        self.add(contentsOf: warnings, modelID: modelID)
+        add(contentsOf: warnings, modelID: modelID)
     }
 }
-
-

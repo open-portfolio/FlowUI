@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 public struct DateLabel: View {
@@ -18,7 +17,7 @@ public struct DateLabel: View {
         df.timeStyle = .none
         return df
     }()
-    
+
     static let dft: DateFormatter = {
         let df = DateFormatter()
         df.dateStyle = .medium
@@ -35,11 +34,11 @@ public struct DateLabel: View {
         self.withTime = withTime
         self.defaultValue = defaultValue
     }
-    
+
     public var body: some View {
         Text(formattedValue)
     }
-    
+
     private var formattedValue: String {
         if let _d = date {
             return f.string(from: _d)
@@ -47,9 +46,8 @@ public struct DateLabel: View {
             return defaultValue
         }
     }
-    
+
     private var f: DateFormatter {
         withTime ? DateLabel.dft : DateLabel.df
     }
 }
-

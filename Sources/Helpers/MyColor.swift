@@ -8,17 +8,14 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
-
-public struct MyColor {
-    
+public enum MyColor {
     public static func getBackgroundFill(_ color: Color, by amount: CGFloat = 0.2) -> AnyView {
         let lite = color.saturate(by: amount)
         let dark = color.desaturate(by: amount)
         return AnyView(
             LinearGradient(gradient: .init(colors: [lite, dark]), startPoint: .topLeading, endPoint: .bottomTrailing)
-            )
+        )
     }
 }

@@ -15,11 +15,9 @@ import FINporter
 import FlowBase
 
 public extension BaseModel.ImportResult {
-    
     static func getImportDetails(_ results: [BaseModel.ImportResult]) -> [String] {
-        
         let resultsByFileName = Dictionary(grouping: results, by: { String($0.url?.lastPathComponent ?? "unknown") })
-        
+
         return resultsByFileName.reduce(into: []) { array, entry in
             let (filename, results) = entry
             let schemaNames = results.compactMap { $0.allocSchema?.camelCasePluralName }
@@ -27,7 +25,7 @@ public extension BaseModel.ImportResult {
             array.append("\(filename) (\(schemaNames.joined(separator: ", ")))")
         }
     }
-    
+
     static func getImportWarnings(_ results: [BaseModel.ImportResult]) -> [InfoMessageStore.Message] {
         results.reduce(into: []) { array, result in
             guard result.hasIssue,

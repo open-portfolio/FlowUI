@@ -8,13 +8,11 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 public struct SidebarToggleButton: View {
-    
     public init() {}
-    
+
     public var body: some View {
         Button(action: toggleSidebar) {
             Label("Sidebar", systemImage: "sidebar.left")
@@ -22,12 +20,12 @@ public struct SidebarToggleButton: View {
         }
         .help("Toggle Sidebar")
     }
-    
+
     // via https://developer.apple.com/forums/thread/651807
     private func toggleSidebar() {
-#if os(iOS)
-#else
-        NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
-#endif
+        #if os(iOS)
+        #else
+            NSApp.keyWindow?.firstResponder?.tryToPerform(#selector(NSSplitViewController.toggleSidebar(_:)), with: nil)
+        #endif
     }
 }

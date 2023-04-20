@@ -8,18 +8,17 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 public struct MyToolbarToggle: View {
     @Binding var value: Bool
     var imageNames: (String, String)
-    
+
     public init(value: Binding<Bool>, imageNames: (String, String)) {
         _value = value
         self.imageNames = imageNames
     }
-    
+
     public var body: some View {
         Button(action: { value.toggle() }) {
             Image(systemName: value ? imageNames.1 : imageNames.0)

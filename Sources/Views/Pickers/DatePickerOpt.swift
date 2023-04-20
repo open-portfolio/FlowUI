@@ -11,7 +11,6 @@
 import SwiftUI
 
 public struct DatePickerOpt: View {
-    
     private let title: String
     @Binding private var selection: Date?
     private let inRange: ClosedRange<Date>
@@ -20,16 +19,17 @@ public struct DatePickerOpt: View {
 
     public init(_ title: String,
                 selection: Binding<Date?>,
-                in inRange: ClosedRange<Date> = Date.distantPast...Date.distantFuture,
+                in inRange: ClosedRange<Date> = Date.distantPast ... Date.distantFuture,
                 defaultDate: Date = Date(),
-                displayedComponents: DatePickerComponents = [.date]) {
+                displayedComponents: DatePickerComponents = [.date])
+    {
         self.title = title
         _selection = selection
         self.inRange = inRange
         self.defaultDate = defaultDate
         self.displayedComponents = displayedComponents
     }
-    
+
     public var body: some View {
         if selection == nil {
             TextField(title, text: .constant(""))
@@ -41,16 +41,16 @@ public struct DatePickerOpt: View {
         } else {
             HStack {
                 DatePicker(title, selection: dateBinding, in: inRange, displayedComponents: displayedComponents)
-                
+
                 Button(action: { self.selection = nil }) {
-                    //Text("clear")
+                    // Text("clear")
                     Image(systemName: "xmark.circle")
                 }
                 .buttonStyle(BorderlessButtonStyle())
             }
         }
     }
-    
+
     private var dateBinding: Binding<Date> {
         Binding(get: { self.selection ?? defaultDate },
                 set: { self.selection = $0 })

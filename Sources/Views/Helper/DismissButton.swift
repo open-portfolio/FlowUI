@@ -8,13 +8,11 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 struct DismissButton: View {
-    
-    var onDismiss: () -> ()
-    
+    var onDismiss: () -> Void
+
     var body: some View {
         Button("Dismiss") {
             onDismiss()

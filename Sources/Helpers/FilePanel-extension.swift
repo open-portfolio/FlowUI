@@ -19,7 +19,7 @@ public extension NSOpenPanel {
         panel.allowsMultipleSelection = true
         panel.canChooseFiles = true
         panel.canChooseDirectories = false
-        //panel.allowedFileTypes = ["csv", "tsv"]  // deprecated in MacOS 12
+        // panel.allowedFileTypes = ["csv", "tsv"]  // deprecated in MacOS 12
         panel.allowedContentTypes = [.commaSeparatedText, .tabSeparatedText, .utf8TabSeparatedText]
         panel.canChooseFiles = true
         panel.begin { result in

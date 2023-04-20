@@ -12,24 +12,24 @@ import os
 import SwiftUI
 
 public struct SharedSettingsView<General: View>: View {
-    
     let termsURL: URL
     let privacyURL: URL
     let general: () -> General
 
     public init(termsURL: URL,
                 privacyURL: URL,
-                general: @escaping () -> General) {
+                general: @escaping () -> General)
+    {
         self.termsURL = termsURL
         self.privacyURL = privacyURL
         self.general = general
     }
-    
+
     public var body: some View {
         VStack {
 //            TabView(selection: $tab) {
 
-                general()
+            general()
 //                    .tabItem {
 //                        Label("General", systemImage: "gearshape")
 //                    }

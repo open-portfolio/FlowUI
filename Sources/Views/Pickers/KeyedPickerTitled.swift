@@ -10,8 +10,8 @@
 
 import SwiftUI
 
-import FlowBase
 import AllocData
+import FlowBase
 
 public struct KeyedPickerTitled<T, Label>: View where T: Hashable & Comparable & AllocKeyed & Titled, Label: View {
     var elements: [T]
@@ -19,12 +19,13 @@ public struct KeyedPickerTitled<T, Label>: View where T: Hashable & Comparable &
     var label: () -> Label
 
     public init(elements: [T], key: Binding<T.Key>,
-                @ViewBuilder label: @escaping () -> Label) {
+                @ViewBuilder label: @escaping () -> Label)
+    {
         self.elements = elements
         _key = key
         self.label = label
     }
-    
+
     public var body: some View {
         Picker(selection: $key, label: label()) {
             Text("None (Select One)")
@@ -46,12 +47,11 @@ public struct KeyedPickerTitled<T, Label>: View where T: Hashable & Comparable &
 //            Spacer()
 //        }
 //    }
-    
+
 //    private var sortedElements: [T] {
 //        elements.sorted()
 //    }
 }
-
 
 public struct KeyedPicker<T, Label>: View where T: Hashable & Comparable & AllocKeyed, Label: View {
     var elements: [T]
@@ -60,15 +60,16 @@ public struct KeyedPicker<T, Label>: View where T: Hashable & Comparable & Alloc
     var label: () -> Label
 
     public init(elements: [T], key: Binding<T.Key>,
-                
+
                 getTitle: @escaping (T) -> String,
-                @ViewBuilder label: @escaping () -> Label) {
+                @ViewBuilder label: @escaping () -> Label)
+    {
         self.elements = elements
         _key = key
         self.getTitle = getTitle
         self.label = label
     }
-    
+
     public var body: some View {
         Picker(selection: $key, label: label()) {
             Text("None (Select One)")

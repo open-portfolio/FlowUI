@@ -11,15 +11,13 @@
 import SwiftUI
 
 public struct HelpCommand: View {
-    
     @Environment(\.openURL) var openURL
-    
+
     public init() {}
-    
+
     public var body: some View {
-        
         Divider()
-        
+
         Button(action: {
             openURL(URL(string: "https://openalloc.github.io/privacy/")!)
         }, label: {

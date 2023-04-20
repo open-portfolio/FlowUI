@@ -8,9 +8,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import Foundation
-
 
 public let flowRowSpacing: CGFloat = 2
 public let flowColumnSpacing: CGFloat = 10

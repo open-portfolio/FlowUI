@@ -15,8 +15,7 @@ public struct DetailPayload {
         self.modelID = modelID
         self.selectedIndex = selectedIndex
     }
-    
+
     public var modelID: UUID
     public var selectedIndex: Int?
 }
-

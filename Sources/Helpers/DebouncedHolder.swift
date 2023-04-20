@@ -33,7 +33,7 @@ public final class DebouncedHolder<T: Equatable>: ObservableObject {
             })
     }
 
-    // TODO ensure this is atomic (somehow)
+    // TODO: ensure this is atomic (somehow)
     /// assign a new value, returning the old value
     func setValue(newValue: T) -> T {
         let oldValue = value

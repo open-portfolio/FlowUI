@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 import AllocData
@@ -22,13 +21,14 @@ public struct SecurityIDPicker<Label>: View where Label: View {
     var label: () -> Label
 
     public init(securities: [MSecurity], assetMap: AssetMap, securityID: Binding<SecurityID>,
-                @ViewBuilder label: @escaping () -> Label) {
+                @ViewBuilder label: @escaping () -> Label)
+    {
         self.securities = securities
         self.assetMap = assetMap
         _securityID = securityID
         self.label = label
     }
-    
+
     public var body: some View {
         Picker(selection: $securityID, label: label()) {
             Text("None (Select One)")

@@ -8,18 +8,16 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 import AllocData
 
 struct RejectedRowsView: View {
-    
     public let accent: Color
     @Binding var schemaName: String
     @Binding var rejectedRows: [AllocRowed.DecodedRow]
-    var onDismiss: () -> ()
-    
+    var onDismiss: () -> Void
+
     var body: some View {
         VStack {
             HStack {
@@ -28,17 +26,17 @@ struct RejectedRowsView: View {
                 Spacer()
                 DismissButton(onDismiss: onDismiss)
             }
-            
+
             LazyVGrid(columns: columns, spacing: 10) {
-                ForEach(0..<headerKeys.count, id: \.self) { n in
+                ForEach(0 ..< headerKeys.count, id: \.self) { n in
                     Text(headerKeys[n])
                 }
             }
             .background(accent.opacity(0.1))
-            
+
             ScrollView {
                 LazyVStack(alignment: .leading) {
-                    ForEach(0..<rejectedRows.count, id: \.self) { n in
+                    ForEach(0 ..< rejectedRows.count, id: \.self) { n in
                         LazyVGrid(columns: columns, spacing: 10) {
                             rowElements(rejectedRows[n])
                         }
@@ -48,7 +46,7 @@ struct RejectedRowsView: View {
         }
         .padding()
     }
-    
+
     private func rowElements(_ row: AllocRowed.DecodedRow) -> some View {
         ForEach(headerKeys, id: \.self) { key in
             VStack {
@@ -60,13 +58,13 @@ struct RejectedRowsView: View {
             }
         }
     }
-    
+
     private var columns: [GridItem] {
         headerKeys.map { _ in
             GridItem(.fixed(100))
         }
     }
-    
+
     private var headerKeys: [String] {
         var keys = Set<String>()
         for row in rejectedRows {

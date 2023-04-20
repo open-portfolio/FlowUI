@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 import Compactor
@@ -19,14 +18,10 @@ public struct RelativeDateLabel: View {
     public init(timeInterval: TimeInterval) {
         self.timeInterval = timeInterval
     }
-    
-    static let timeCompactor: TimeCompactor = {
-        TimeCompactor(ifZero: "", style: .full)
-    }()
+
+    static let timeCompactor: TimeCompactor = .init(ifZero: "", style: .full)
 
     public var body: some View {
         Text(RelativeDateLabel.timeCompactor.string(from: timeInterval as NSNumber) ?? "")
     }
 }
-
-

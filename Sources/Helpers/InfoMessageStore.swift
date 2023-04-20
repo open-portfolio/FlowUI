@@ -28,9 +28,8 @@ public struct InfoMessagePayload {
 // each open document.
 
 public final class InfoMessageStore: ObservableObject {
-    
     public typealias MessagesMap = [UUID: [Message]]
-    
+
     public struct Message: Identifiable {
         public let id: UUID
         public let val: String
@@ -40,7 +39,8 @@ public final class InfoMessageStore: ObservableObject {
         public init(id: UUID = UUID(),
                     val: String,
                     schemaName: String? = nil,
-                    rejectedRows: [AllocRowed.DecodedRow] = []) {
+                    rejectedRows: [AllocRowed.DecodedRow] = [])
+        {
             self.id = id
             self.val = val
             self.schemaName = schemaName
@@ -50,31 +50,29 @@ public final class InfoMessageStore: ObservableObject {
 
     // messages mapped by each document model id
     @Published private var messagesMap: MessagesMap
-    
+
     public init(messagesMap: MessagesMap = [:]) {
         self.messagesMap = messagesMap
     }
-    
+
     public func messages(modelID: UUID) -> [Message] {
         messagesMap[modelID, default: []]
     }
-        
+
     public func hasMessages(modelID: UUID) -> Bool {
         messages(modelID: modelID).count > 0
     }
-    
+
     public func add(_ nuMessage: String, modelID: UUID, schemaName: String? = nil) {
         let message = Message(val: nuMessage, schemaName: schemaName)
         add(contentsOf: [message], modelID: modelID)
     }
-    
+
     public func add(contentsOf nuMessages: [Message], modelID: UUID) {
         messagesMap[modelID, default: []].append(contentsOf: nuMessages)
     }
-    
+
     public func dismiss(modelID: UUID) {
         messagesMap[modelID, default: []].removeAll()
     }
 }
-
-

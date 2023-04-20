@@ -26,7 +26,7 @@ public struct SharesLabel: View {
     let ifZero: String?
     let style: SharesStyle
     let epsilon: Double
-    
+
     public init(value: Double?, ifZero: String? = nil, style: SharesStyle = .default_, epsilon: Double = 0.000001) {
         self.value = value
         self.ifZero = ifZero
@@ -41,7 +41,7 @@ public struct SharesLabel: View {
         }
         .lineLimit(1)
     }
-    
+
     private var formatted: String? {
         guard let value_ = value else { return nil }
         switch style {

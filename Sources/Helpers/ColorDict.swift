@@ -33,7 +33,7 @@ public func getColor(_ colorCode: Int?) -> ColorPair {
     {
         return pairArray[0] // TODO: support dark mode pair too
     } else {
-        return DefaultColorPair //(Color.black, Color.white)
+        return DefaultColorPair // (Color.black, Color.white)
     }
 }
 

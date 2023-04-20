@@ -12,10 +12,9 @@ import SwiftUI
 
 // support default value for optional binding where non-optional binding is required
 // via https://stackoverflow.com/a/61002589/18157525
-public func ??<T>(lhs: Binding<Optional<T>>, rhs: T) -> Binding<T> {
+public func ?? <T>(lhs: Binding<T?>, rhs: T) -> Binding<T> {
     Binding(
         get: { lhs.wrappedValue ?? rhs },
         set: { lhs.wrappedValue = $0 }
     )
 }
-

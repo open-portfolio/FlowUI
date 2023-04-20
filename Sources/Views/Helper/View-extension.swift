@@ -21,25 +21,25 @@ public extension View {
 
 public extension View {
     /**
-    Modify the view in a closure. This can be useful when you need to conditionally apply a modifier that is unavailable on certain platforms.
+     Modify the view in a closure. This can be useful when you need to conditionally apply a modifier that is unavailable on certain platforms.
 
-    For example, imagine this code needing to run on macOS too where `View#actionSheet()` is not available:
+     For example, imagine this code needing to run on macOS too where `View#actionSheet()` is not available:
 
-    ```
-    struct ContentView: View {
-        var body: some View {
-            Text("Unicorn")
-                .modify {
-                    #if os(iOS)
-                    $0.actionSheet(…)
-                    #else
-                    $0
-                    #endif
-                }
-        }
-    }
-    ```
-    */
+     ```
+     struct ContentView: View {
+         var body: some View {
+             Text("Unicorn")
+                 .modify {
+                     #if os(iOS)
+                     $0.actionSheet(…)
+                     #else
+                     $0
+                     #endif
+                 }
+         }
+     }
+     ```
+     */
     func modify<T: View>(@ViewBuilder modifier: (Self) -> T) -> T {
         modifier(self)
     }
@@ -47,9 +47,7 @@ public extension View {
 
 /// standard padding
 public extension View {
-    
     func mpadding() -> some View {
-        self
-            .padding(.horizontal, 5)
+        padding(.horizontal, 5)
     }
 }

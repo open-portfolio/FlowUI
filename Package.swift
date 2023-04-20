@@ -15,7 +15,8 @@ let package = Package(
     products: [
         .library(
             name: "FlowUI",
-            targets: ["FlowUI"]),
+            targets: ["FlowUI"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/openalloc/FlowBase", from: "1.0.0"),
@@ -43,6 +44,6 @@ let package = Package(
                 .product(name: "KeyWindow", package: "KeyWindow"),
             ],
             path: "Sources"
-        )
+        ),
     ]
 )

@@ -8,60 +8,59 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
-extension Color {
-    
-#if canImport(UIKit)
-    private typealias NativeColor = UIColor
-#elseif canImport(AppKit)
-    private typealias NativeColor = NSColor
-#endif
-    
+public extension Color {
+    #if canImport(UIKit)
+        private typealias NativeColor = UIColor
+    #elseif canImport(AppKit)
+        private typealias NativeColor = NSColor
+    #endif
+
     /// transform a dynamic color to a componentized one, so its components can be fetched and manipulated
-    public static func componentize(_ rawColor: Color) -> Color {
+    static func componentize(_ rawColor: Color) -> Color {
         let nativeColor = NativeColor(rawColor)
         guard nativeColor.type == .catalog && nativeColor.catalogNameComponent.description == "#$customDynamic" else { return rawColor }
         return Color(nativeColor.usingColorSpace(.genericRGB)!)
     }
-    
+
     private var components: (h: CGFloat, s: CGFloat, b: CGFloat, o: CGFloat) {
-        
         var h: CGFloat = 0
         var s: CGFloat = 0
         var b: CGFloat = 0
         var o: CGFloat = 0
-        
+
         let nativeColor = NativeColor(self)
         nativeColor.getHue(&h, saturation: &s, brightness: &b, alpha: &o)
-        
+
         return (h, s, b, o)
     }
-    
-    public func saturate(by percent: CGFloat = 0.1) -> Color {
-        let c = self.components
+
+    func saturate(by percent: CGFloat = 0.1) -> Color {
+        let c = components
         return Color(hue: c.h,
                      saturation: clipUnit(c.s - percent),
-                     brightness: c.b, //clipUnit(c.b - percent),
+                     brightness: c.b, // clipUnit(c.b - percent),
                      opacity: c.o)
     }
-    public func desaturate(by percent: CGFloat = 0.1) -> Color {
+
+    func desaturate(by percent: CGFloat = 0.1) -> Color {
         saturate(by: -1 * abs(percent))
     }
-    
-    public func lighten(by percent: CGFloat = 0.1) -> Color {
-        let c = self.components
+
+    func lighten(by percent: CGFloat = 0.1) -> Color {
+        let c = components
         return Color(hue: c.h,
-                     saturation: c.s, //clipUnit(c.s - percent),
+                     saturation: c.s, // clipUnit(c.s - percent),
                      brightness: clipUnit(c.b - percent),
                      opacity: c.o)
     }
-    public func darken(by percent: CGFloat = 0.1) -> Color {
+
+    func darken(by percent: CGFloat = 0.1) -> Color {
         lighten(by: -1 * abs(percent))
     }
-    
-    public static func palette(start: Color, end: Color, steps: Int = 5) -> [Color] {
+
+    static func palette(start: Color, end: Color, steps: Int = 5) -> [Color] {
         guard steps > 0 else { return [] }
         let s = start.components
         let e = end.components
@@ -73,18 +72,17 @@ extension Color {
                   opacity: lerp(s.o, e.o, by: $0))
         }
     }
-    
+
     /// Linearly interpolate from `from` to `to` by the fraction `amount`.
     internal static func lerp<T: BinaryFloatingPoint>(_ fromValue: T, _ toValue: T, by amount: T) -> T {
         fromValue + (toValue - fromValue) * amount
     }
-    
+
     internal func clipUnit<T: BinaryFloatingPoint>(_ v: T) -> T {
         clip(v, 0.0, 1.0)
     }
-    
+
     internal func clip<T: Comparable>(_ v: T, _ minimum: T, _ maximum: T) -> T {
         max(min(v, maximum), minimum)
     }
 }
-

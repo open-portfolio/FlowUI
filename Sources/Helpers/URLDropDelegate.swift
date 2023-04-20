@@ -8,27 +8,25 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
-import SwiftUI
 import os
+import SwiftUI
 
 private let log = Logger(subsystem: "app.flowallocator.shared", category: "drop")
 
-
 public struct URLDropDelegate: DropDelegate {
-    
     @ObservedObject public var debouncedURLs: DebouncedHolder<[URL]>
     var utiImportFile: String
 
     public init(utiImportFile: String = "public.file-url",
-                milliseconds: Int = 750) {
+                milliseconds: Int = 750)
+    {
         self.utiImportFile = utiImportFile
         debouncedURLs = DebouncedHolder<[URL]>(initialValue: [], milliseconds: milliseconds)
     }
-    
+
     public func performDrop(info: DropInfo) -> Bool {
         log.info("\(#function) ENTER"); defer { log.info("\(#function) EXIT") }
-        
+
         guard info.hasItemsConforming(to: [utiImportFile]) else {
             return false
         }
@@ -44,7 +42,7 @@ public struct URLDropDelegate: DropDelegate {
 
         return true
     }
-    
+
     public func purge() -> [URL] {
         debouncedURLs.setValue(newValue: [])
     }

@@ -8,11 +8,9 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 public struct TimeOfDayPicker: View {
-    
     public enum Vals: String, CaseIterable {
         case useDefault = ""
         case z00_00 = "00:00"
@@ -39,7 +37,7 @@ public struct TimeOfDayPicker: View {
         case z21_00 = "21:00"
         case z22_00 = "22:00"
         case z23_00 = "23:00"
-        
+
         var description: String {
             switch self {
             case .useDefault:
@@ -53,15 +51,15 @@ public struct TimeOfDayPicker: View {
             }
         }
     }
-    
+
     var title: String
     @Binding var timeOfDay: Vals
-    
+
     public init(title: String? = nil, timeOfDay: Binding<Vals>) {
         self.title = title ?? "Time of Day"
         _timeOfDay = timeOfDay
     }
-    
+
     public var body: some View {
         HStack {
             Picker(selection: $timeOfDay, label: Text(title)) {
@@ -78,4 +76,3 @@ public struct TimeOfDayPicker: View {
         }
     }
 }
-

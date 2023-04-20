@@ -8,23 +8,22 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import AllocData
 
 extension MAsset.Key: Identifiable {
     public var id: String {
-        self.assetNormID
+        assetNormID
     }
 }
 
 extension MAccount.Key: Identifiable {
     public var id: String {
-        self.accountNormID
+        accountNormID
     }
 }
 
 extension MStrategy.Key: Identifiable {
     public var id: String {
-        self.strategyNormID
+        strategyNormID
     }
 }

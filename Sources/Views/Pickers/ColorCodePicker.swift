@@ -25,13 +25,13 @@ struct ColorCodePicker: View {
             .popover(isPresented: $showPopover, arrowEdge: .top) {
                 colorSelectView
             }
-            
+
             Button(action: { colorCode = nilColorCode }) {
                 Text("Clear")
             }
         }
     }
-    
+
     private var colorSelectView: some View {
         VStack {
             List(selection: $colorCode) {
@@ -46,7 +46,7 @@ struct ColorCodePicker: View {
         }
         .frame(width: 200, height: 300)
     }
-    
+
     private var colorKeys: [Int] {
         Array(colorDict.keys.sorted())
     }

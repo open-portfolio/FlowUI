@@ -20,4 +20,3 @@ public func getAssetColorMap(colorCodeMap: ColorCodeMap) -> AssetColorMap {
     let tuples: [(assetKey: AssetKey, colorPair: ColorPair)] = colorCodeMap.map { (assetKey: $0, colorPair: getColor($1)) }
     return Dictionary(uniqueKeysWithValues: tuples)
 }
-

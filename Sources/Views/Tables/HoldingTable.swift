@@ -8,30 +8,28 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
-import SwiftUI
+import AllocData
 import Detailer
 import DetailerMenu
-import AllocData
-import Tabler
 import FlowBase
+import SwiftUI
+import Tabler
 
 public struct HoldingTable: View {
-    
     // MARK: - Parameters
-    
+
     @Binding private var model: BaseModel
     private let ax: BaseContext
     private let account: MAccount?
-    
+
     public init(model: Binding<BaseModel>, ax: BaseContext, account: MAccount?) {
         _model = model
         self.ax = ax
         self.account = account
     }
-    
+
     // MARK: - Field Metadata
-    
+
     private var gridItems: [GridItem] {
         var items: [GridItem] = []
         if account == nil {
@@ -46,11 +44,11 @@ public struct HoldingTable: View {
         ])
         return items
     }
-    
+
     // MARK: - Views
-    
+
     typealias Context = TablerContext<MHolding>
-    
+
     private func header(_ ctx: Binding<Context>) -> some View {
         LazyVGrid(columns: gridItems, alignment: .leading, spacing: flowColumnSpacing) {
             if account == nil {
@@ -75,7 +73,7 @@ public struct HoldingTable: View {
                 .modifier(HeaderCell())
         }
     }
-    
+
     private func row(_ element: MHolding) -> some View {
         LazyVGrid(columns: gridItems, alignment: .leading, spacing: flowColumnSpacing) {
             if account == nil {
@@ -95,7 +93,7 @@ public struct HoldingTable: View {
         }
         .modifier(EditDetailerContextMenu(element, onDelete: deleteAction, onEdit: { toEdit = $0 }))
     }
-    
+
     private func editDetail(ctx: DetailerContext<MHolding>, element: Binding<MHolding>) -> some View {
         let disableKey = ctx.originalID != newElement.primaryKey
         return Form {
@@ -104,45 +102,46 @@ public struct HoldingTable: View {
             }
             .disabled((account?.primaryKey.isValid ?? false) || disableKey)
             .validate(ctx, element, \.accountID) { $0.count > 0 }
-            
+
             SecurityIDPicker(securities: model.securities.sorted(),
                              assetMap: assetMap,
-                             securityID: element.securityID) {
+                             securityID: element.securityID)
+            {
                 Text("Security")
             }
             .disabled(disableKey)
             .validate(ctx, element, \.securityID) { $0.count > 0 }
-            
+
             TextField("Lot ID", text: element.lotID)
                 .disabled(disableKey)
 
             SharesField("Shares Held", value: element.shareCount ?? 0)
                 .validate(ctx, element, \.shareCount) { ($0 ?? 0) > 0 }
-            
+
             CurrencyField("Cost Basis (price paid per share)", value: element.shareBasis ?? 0)
-            
+
             DatePickerOpt("Acquired At",
                           selection: element.acquiredAt,
                           displayedComponents: [.date, .hourAndMinute])
         }
     }
-    
+
     // MARK: - Locals
-    
+
     private typealias Sort = TablerSort<MHolding>
     private typealias DConfig = DetailerConfig<MHolding>
     private typealias TConfig = TablerStackConfig<MHolding>
-    
+
     private var dconfig: DConfig {
         DConfig(onDelete: { model.delete($0) },
                 onSave: saveAction,
-                titler: { _ in ("Holding") })
+                titler: { _ in "Holding" })
     }
-    
+
     @State var toEdit: MHolding? = nil
     @State var selected: MHolding.ID? = nil
     @State var hovered: MHolding.ID? = nil
-    
+
     public var body: some View {
         BaseModelTable(
             selected: $selected,
@@ -151,63 +150,65 @@ public struct HoldingTable: View {
             onEdit: editAction,
             onClear: clearAction,
             onExport: exportAction,
-            onDelete: dconfig.onDelete) {
-                TablerStack1(
-                    .init(onHover: { if $1 { hovered = $0 } else { hovered = nil } }),
-                    header: header,
-                    row: row,
-                    rowBackground: { MyRowBackground($0, hovered: hovered, selected: selected) },
-                    results: holdings,
-                    selected: $selected)
-                .sideways(minWidth: account == nil ? 1200 : 800, showIndicators: true)
-            }
-            .editDetailer(dconfig,
-                          toEdit: $toEdit,
-                          originalID: toEdit?.id,
-                          detailContent: editDetail)
+            onDelete: dconfig.onDelete
+        ) {
+            TablerStack1(
+                .init(onHover: { if $1 { hovered = $0 } else { hovered = nil } }),
+                header: header,
+                row: row,
+                rowBackground: { MyRowBackground($0, hovered: hovered, selected: selected) },
+                results: holdings,
+                selected: $selected
+            )
+            .sideways(minWidth: account == nil ? 1200 : 800, showIndicators: true)
+        }
+        .editDetailer(dconfig,
+                      toEdit: $toEdit,
+                      originalID: toEdit?.id,
+                      detailContent: editDetail)
     }
-    
+
     // MARK: - Helpers
-    
+
     private var holdings: [MHolding] {
         guard account != nil else { return model.holdings }
         return model.holdings.filter {
             $0.accountKey == account!.primaryKey
         }
     }
-    
+
     private var assetMap: AssetMap {
         if ax.assetMap.count > 0 {
             return ax.assetMap
         }
         return model.makeAssetMap()
     }
-    
+
     private var securityMap: SecurityMap {
         if ax.securityMap.count > 0 {
             return ax.securityMap
         }
         return model.makeSecurityMap()
     }
-    
+
     // MARK: - Action Handlers
-    
+
     private func deleteAction(element: MHolding) {
         model.delete(element)
     }
-    
+
     private func editAction(_ id: MHolding.ID?) -> MHolding? {
         guard let _id = id else { return nil }
         return model.holdings.first(where: { $0.id == _id })
     }
-    
+
     private func saveAction(ctx: DetailerContext<MHolding>, element: MHolding) {
         let isNew = ctx.originalID == newElement.primaryKey
         model.save(element,
                    to: \.holdings,
                    originalID: isNew ? nil : ctx.originalID)
     }
-    
+
     private var newElement: MHolding {
         let accountID = account?.accountID ?? ""
         return MHolding(accountID: accountID,
@@ -217,7 +218,7 @@ public struct HoldingTable: View {
                         shareBasis: nil,
                         acquiredAt: nil)
     }
-    
+
     private func clearAction() {
         var elements = model.holdings
         if let accountKey = account?.primaryKey {
@@ -225,16 +226,16 @@ public struct HoldingTable: View {
         }
         elements.forEach { model.delete($0) }
     }
-    
+
     private func exportAction() {
         let finFormat = AllocFormat.CSV
         if let data = try? exportData(model.holdings, format: finFormat),
            let ext = finFormat.defaultFileExtension
         {
             let name = MHolding.entityName.plural.replacingOccurrences(of: " ", with: "-")
-#if os(macOS)
-            NSSavePanel.saveData(data, name: name, ext: ext, completion: { _ in })
-#endif
+            #if os(macOS)
+                NSSavePanel.saveData(data, name: name, ext: ext, completion: { _ in })
+            #endif
         }
     }
 }

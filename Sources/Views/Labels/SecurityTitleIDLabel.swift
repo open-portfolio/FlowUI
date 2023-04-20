@@ -14,7 +14,6 @@ import AllocData
 
 import FlowBase
 
-
 public struct SecurityTitleIDLabel: View {
     private let model: BaseModel
     private let ax: BaseContext
@@ -27,30 +26,31 @@ public struct SecurityTitleIDLabel: View {
         self.securityKey = securityKey
         self.withAssetID = withAssetID
     }
-    
+
     public var body: some View {
         Text(MSecurity.getTitleID(securityKey, securityMap, assetMap, withAssetID: withAssetID) ?? "")
             .colorCapsule(pair)
     }
-    
+
     private var securityMap: SecurityMap {
         if ax.securityMap.count > 0 {
             return ax.securityMap
         }
         return model.makeSecurityMap()
     }
-    
+
     private var assetMap: AssetMap {
         if ax.assetMap.count > 0 {
             return ax.assetMap
         }
         return model.makeAssetMap()
     }
-    
+
     private var pair: (Color, Color) {
         if let _securityKey = securityKey,
            let security = securityMap[_securityKey],
-           let colorCode = assetMap[security.assetKey]?.colorCode {
+           let colorCode = assetMap[security.assetKey]?.colorCode
+        {
             return getColor(colorCode)
         } else {
             return (.primary, .clear)

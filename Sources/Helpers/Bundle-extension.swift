@@ -8,9 +8,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import Foundation
-
 
 extension Bundle {
     var applicationName: String? {
@@ -18,4 +16,3 @@ extension Bundle {
         return (dictionary["CFBundleDisplayName"] as? String) ?? (dictionary["CFBundleName"] as? String)
     }
 }
-

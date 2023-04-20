@@ -8,13 +8,11 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 public struct MustAcknowledgeTerms: View {
-    
     public init() {}
-    
+
     public var body: some View {
         GroupBox {
             VStack(alignment: .center) {
@@ -22,19 +20,20 @@ public struct MustAcknowledgeTerms: View {
                     Text("You will need to agree to ‘Terms and Conditions’ to enable basic functionality.")
                         .font(.title2)
                     #if os(macOS)
-                    Button(action: {
-                        NotificationCenter.default.post(name: .showTerms, object: nil)
-                    }, label: {
-                        Text("Review ‘Terms and Conditions’")
-                    })
-                    #else
-                    NavigationLink(
-                        destination: TermsView(showTerms: $showTerms, onUpdate: {
+                        Button(action: {
                             NotificationCenter.default.post(name: .showTerms, object: nil)
-                        }),
-                        label: {
+                        }, label: {
                             Text("Review ‘Terms and Conditions’")
                         })
+                    #else
+                        NavigationLink(
+                            destination: TermsView(showTerms: $showTerms, onUpdate: {
+                                NotificationCenter.default.post(name: .showTerms, object: nil)
+                            }),
+                            label: {
+                                Text("Review ‘Terms and Conditions’")
+                            }
+                        )
                     #endif
                 }
                 .padding()

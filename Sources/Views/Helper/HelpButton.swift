@@ -8,12 +8,11 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 public struct HelpButton: View {
     @Environment(\.openURL) var openURL
-    
+
     var appName: String
     var topicName: String
 
@@ -21,18 +20,16 @@ public struct HelpButton: View {
         self.appName = appName
         self.topicName = topicName
     }
-    
+
     public var body: some View {
-        
         Button(action: {
             openURL(url)
-        })
-        {
+        }) {
             buttonLook
         }
         .buttonStyle(BorderlessButtonStyle())
     }
-               
+
     // https://openalloc.github.io/allocator/holdingsParticipation/index.html
     private var url: URL {
         URL(string: "https://openalloc.github.io/\(appName)/\(topicName)/index.html")!
@@ -50,8 +47,8 @@ public struct HelpButton: View {
     }
 }
 
-//struct HelpButton_Previews: PreviewProvider {
+// struct HelpButton_Previews: PreviewProvider {
 //    static var previews: some View {
 //        HelpButton(appName: "allocator", topicName: "optimize")
 //    }
-//}
+// }

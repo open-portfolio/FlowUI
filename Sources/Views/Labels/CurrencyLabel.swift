@@ -44,17 +44,18 @@ public struct CurrencyLabel: View {
     var ifZero: String?
     var style: CurrencyStyle
     var leadingPlus: Bool
-    
+
     public init(value: Double,
                 ifZero: String? = nil,
                 style: CurrencyStyle = .default_,
-                leadingPlus: Bool = false) {
+                leadingPlus: Bool = false)
+    {
         self.value = value
         self.ifZero = ifZero
         self.style = style
         self.leadingPlus = leadingPlus
     }
-    
+
     public var body: some View {
         if value == 0 && ifZero != nil {
             Text(ifZero!)

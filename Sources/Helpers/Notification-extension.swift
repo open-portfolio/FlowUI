@@ -10,8 +10,7 @@
 
 import Foundation
 
-public extension Notification.Name
-{
+public extension Notification.Name {
     static let refreshContext = Notification.Name("refreshContext") // payload of model UUID
     static let checkTerms = Notification.Name("checkTerms")
     static let showTerms = Notification.Name("showTerms")
@@ -31,6 +30,5 @@ public extension Notification.Name
     static let valuationSnapshotDetail = Notification.Name("valuationSnapshotDetail")
     static let valuationPositionDetail = Notification.Name("valuationPositionDetail")
     static let valuationCashflowDetail = Notification.Name("valuationCashflowDetail")
-    static let valuationAccountDetail  = Notification.Name("valuationAccountDetail")
+    static let valuationAccountDetail = Notification.Name("valuationAccountDetail")
 }
-

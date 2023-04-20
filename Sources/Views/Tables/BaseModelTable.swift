@@ -10,8 +10,8 @@
 
 import SwiftUI
 
-import Sideways
 import Detailer
+import Sideways
 import Tabler
 
 import FlowBase
@@ -21,7 +21,7 @@ public let outsideRowHeader = EdgeInsets(top: 2, leading: 7, bottom: 2, trailing
 public let columnSpacing: CGFloat = 5
 
 public struct HeaderCell: ViewModifier {
-    public init() { }
+    public init() {}
     public func body(content: Content) -> some View {
         content
             .padding(.vertical, 4)
@@ -37,7 +37,6 @@ public struct HeaderCell: ViewModifier {
 }
 
 struct Cell: ViewModifier {
-
     func body(content: Content) -> some View {
         content
             .padding(.vertical, 4)
@@ -46,13 +45,13 @@ struct Cell: ViewModifier {
 }
 
 public struct BaseModelTable<Element, Content>: View
-where Element: Hashable & Equatable & Identifiable & EntityNamed,
-      Content: View {
-    
+    where Element: Hashable & Equatable & Identifiable & EntityNamed,
+    Content: View
+{
     public typealias MyContent = () -> Content
-    
+
     // MARK: - Parameters
-    
+
     @Binding var selected: Element.ID?
     @Binding var toEdit: Element?
     private let onAdd: () -> Element
@@ -62,7 +61,7 @@ where Element: Hashable & Equatable & Identifiable & EntityNamed,
     private let onDelete: ((Element) -> Void)?
     private let toolbarContent: AnyViewContent?
     private let content: MyContent
-    
+
     public init(selected: Binding<Element.ID?>,
                 toEdit: Binding<Element?>,
                 onAdd: @escaping () -> Element,
@@ -71,7 +70,8 @@ where Element: Hashable & Equatable & Identifiable & EntityNamed,
                 onExport: OnExport? = nil,
                 onDelete: ((Element) -> Void)? = nil,
                 toolbarContent: AnyViewContent? = nil,
-                content: @escaping MyContent) {
+                content: @escaping MyContent)
+    {
         _selected = selected
         _toEdit = toEdit
         self.onAdd = onAdd
@@ -82,32 +82,32 @@ where Element: Hashable & Equatable & Identifiable & EntityNamed,
         self.toolbarContent = toolbarContent
         self.content = content
     }
-    
+
     // MARK: - Locals
-    
+
     @State private var showClearModal = false
-    
+
     // MARK: - Views
-    
+
     public var body: some View {
         VStack {
             headerBar
                 .padding()
-            
+
             Sideways(minWidth: 400) {
                 content()
             }
-            
+
             footerBar
                 .padding()
-            
+
             HStack {}
-            .sheet(isPresented: $showClearModal) {
-                ClearRecordsAlert(title: pluralName, onClear: clearAction)
-            }
+                .sheet(isPresented: $showClearModal) {
+                    ClearRecordsAlert(title: pluralName, onClear: clearAction)
+                }
         }
     }
-    
+
     private var headerBar: some View {
         HStack {
             Text(pluralName)
@@ -118,7 +118,7 @@ where Element: Hashable & Equatable & Identifiable & EntityNamed,
             detailButton
         }
     }
-    
+
     private var footerBar: some View {
         HStack {
             clearButton
@@ -128,27 +128,27 @@ where Element: Hashable & Equatable & Identifiable & EntityNamed,
             exportButton
         }
     }
-    
+
     private var addButton: some View {
         Button(action: addAction) {
             Image(systemName: "plus")
             //            Label("Add \(singularName)", systemImage: "plus")
         }
     }
-    
+
     private var detailButton: some View {
         Button(action: { detailAction() }) {
             Text("Detail")
         }
         .disabled(selected == nil)
     }
-    
+
     private var exportButton: some View {
         Button(action: exportAction) {
             Text("Export")
         }
     }
-    
+
     private var clearButton: some View {
         Button(action: {
             showClearModal = true
@@ -158,31 +158,31 @@ where Element: Hashable & Equatable & Identifiable & EntityNamed,
         }
         .disabled(onDelete == nil)
     }
-    
+
     // MARK: - Helpers
-    
+
     private var singularName: String {
         Element.entityName.singular.capitalized
     }
-    
+
     private var pluralName: String {
         Element.entityName.plural.capitalized
     }
-    
+
     // MARK: - Action Handlers
-    
+
     private func addAction() {
         toEdit = onAdd()
     }
-    
+
     private func detailAction() {
         toEdit = onEdit(selected)
     }
-    
+
     private func exportAction() {
         onExport?()
     }
-    
+
     private func clearAction() {
         onClear?()
     }

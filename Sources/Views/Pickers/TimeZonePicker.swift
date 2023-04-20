@@ -8,17 +8,15 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 public struct TimeZonePicker: View {
-    
     @Binding var timeZoneID: String
-    
+
     public init(timeZoneID: Binding<String>) {
         _timeZoneID = timeZoneID
     }
-    
+
     public var body: some View {
         HStack {
             Picker(selection: $timeZoneID, label: Text("Time Zone")) {
@@ -41,8 +39,8 @@ public struct TimeZonePicker: View {
     }
 }
 
-//struct TimeZonePicker_Previews: PreviewProvider {
+// struct TimeZonePicker_Previews: PreviewProvider {
 //    static var previews: some View {
 //        TimeZonePicker()
 //    }
-//}
+// }

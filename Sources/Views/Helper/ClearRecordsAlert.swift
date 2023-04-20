@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 import FlowBase
@@ -55,7 +54,7 @@ struct ClearRecordsAlert: View {
     // MARK: - Actions
 
     private func cancelAction() {
-        //print("cancelAction")
+        // print("cancelAction")
         dismissAction()
     }
 

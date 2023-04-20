@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 import AllocData
@@ -24,19 +23,20 @@ public struct HoldingsCell: View {
         case gainLossPercent
         case tickerShareCount
     }
-    
+
     var ax: BaseContext
     var tickerSummaryMap: TickerHoldingsSummaryMap
     var field: SummaryField
-    
+
     public init(ax: BaseContext,
                 tickerSummaryMap: TickerHoldingsSummaryMap,
-                field: SummaryField) {
+                field: SummaryField)
+    {
         self.ax = ax
         self.tickerSummaryMap = tickerSummaryMap
         self.field = field
     }
-    
+
     public var body: some View {
         VStack {
             ForEach(securities, id: \.self) { security in
@@ -61,13 +61,13 @@ public struct HoldingsCell: View {
             }
         }
     }
-    
+
     // MARK: - Helpers
-    
+
     private var securityKeys: [SecurityKey] {
         tickerSummaryMap.map(\.key)
     }
-    
+
     private var securities: [MSecurity] {
         securityKeys.compactMap { ax.securityMap[$0] }.sorted(by: { $0.securityID < $1.securityID })
     }

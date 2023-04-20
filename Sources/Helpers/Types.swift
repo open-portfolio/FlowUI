@@ -32,5 +32,3 @@ public typealias OnMove = (IndexSet, Int) -> Void
 public typealias OnSave<T> = () throws -> Void
 public typealias OnSelect<T> = (T) -> Void
 public typealias PlainFormatter<T> = (T) -> String
-
-

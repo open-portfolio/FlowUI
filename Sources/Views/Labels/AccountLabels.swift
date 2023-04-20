@@ -26,11 +26,11 @@ public struct AccountTitleLabel: View {
         self.accountKey = accountKey
         self.withID = withID
     }
-    
+
     public var body: some View {
         Text(MAccount.getTitleID(accountKey, accountMap, withID: withID) ?? "")
     }
-    
+
     private var accountMap: AccountMap {
         if ax.accountMap.count > 0 {
             return ax.accountMap

@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 public struct WarningIndicator: View {
@@ -21,7 +20,7 @@ public struct WarningIndicator: View {
         self.fgColor = fgColor
         self.bgColor = bgColor
     }
-    
+
     public var body: some View {
         ZStack {
             Image(systemName: "circle.fill")
@@ -40,7 +39,7 @@ public struct WarningIndicator: View {
         switch n {
         case ..<0:
             return "-"
-        case 0..<100:
+        case 0 ..< 100:
             return String(n)
         default:
             return "!"

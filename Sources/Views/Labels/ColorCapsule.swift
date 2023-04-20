@@ -14,16 +14,16 @@ import AllocData
 
 import FlowBase
 
-extension View {
-    public func colorCapsule(_ colorPair: (Color, Color)) -> some View {
+public extension View {
+    func colorCapsule(_ colorPair: (Color, Color)) -> some View {
         self
-            //.frame(maxWidth: .infinity, alignment: alignment)
+            // .frame(maxWidth: .infinity, alignment: alignment)
             .padding(.horizontal)
             .padding(.vertical, 5)
             .foregroundColor(colorPair.0)
             .background(Capsule(style: .continuous)
-                            .fill(colorPair.1)
-                            .shadow(radius: 2)
-                            .padding(.horizontal, 2))
+                .fill(colorPair.1)
+                .shadow(radius: 2)
+                .padding(.horizontal, 2))
     }
 }

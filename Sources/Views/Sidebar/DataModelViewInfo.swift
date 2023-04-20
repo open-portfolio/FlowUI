@@ -8,16 +8,15 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
-import SwiftUI
 import FlowBase
+import SwiftUI
 
 public struct DataModelViewInfo: Identifiable {
     public let id: String // menuID
     public let tableView: AnyView
     public let title: String
     public let count: Int
-    
+
     public init(id: String, tableView: AnyView, title: String, count: Int) {
         self.id = id
         self.tableView = tableView
@@ -29,10 +28,9 @@ public struct DataModelViewInfo: Identifiable {
 public struct DataModelViewCommand: Identifiable {
     public let id: String // menuID
     public let title: String
-    
+
     public init(id: String, title: String) {
         self.id = id
         self.title = title
     }
 }
-

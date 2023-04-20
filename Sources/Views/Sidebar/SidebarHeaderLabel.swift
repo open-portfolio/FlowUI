@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 public struct SidebarHeaderLabel: View {
@@ -21,11 +20,10 @@ public struct SidebarHeaderLabel: View {
         self.letter = letter
         self.fill = fill
     }
-    
+
     public var body: some View {
         HStack(spacing: 5) {
             PrefixedLabel(letter, width: 20, height: 20, fill: fill, format: { Text($0) }, textStyle: .headline) {
-                
                 Text(title)
                     .bold()
                     .textCase(.uppercase)

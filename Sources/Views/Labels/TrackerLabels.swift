@@ -26,11 +26,11 @@ public struct TrackerTitleLabel: View {
         self.trackerKey = trackerKey
         self.withID = withID
     }
-    
+
     public var body: some View {
         Text(MTracker.getTitleID(trackerKey, trackerMap, withID: withID) ?? "")
     }
-    
+
     private var trackerMap: TrackerMap {
         if ax.trackerMap.count > 0 {
             return ax.trackerMap

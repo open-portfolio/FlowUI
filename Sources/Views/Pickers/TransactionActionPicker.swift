@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 import AllocData
@@ -18,13 +17,14 @@ private let defaultAction = MTransaction.Action.miscflow
 struct TransactionActionPicker<Label>: View where Label: View {
     @Binding var selectedAction: MTransaction.Action
     var label: () -> Label
-    
+
     public init(selectedAction: Binding<MTransaction.Action>,
-                @ViewBuilder label: @escaping () -> Label) {
+                @ViewBuilder label: @escaping () -> Label)
+    {
         _selectedAction = selectedAction
         self.label = label
     }
-    
+
     @State private var rawAction: String = defaultAction.rawValue
 
     public var body: some View {

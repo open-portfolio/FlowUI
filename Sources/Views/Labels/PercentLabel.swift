@@ -28,7 +28,7 @@ public struct PercentLabel: View {
         }
         .lineLimit(1)
     }
-    
+
     private var formattedValue: String {
         if ifZero != nil && value == 0 {
             return ifZero!

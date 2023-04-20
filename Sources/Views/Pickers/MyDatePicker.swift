@@ -8,23 +8,21 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 public struct MyDatePicker: View {
-    
     @Binding var date: Date
     var minimumDate: Date?
     var now: Date
     var onChange: (Date) -> Void
-    
+
     public init(date: Binding<Date>, minimumDate: Date?, now: Date, onChange: @escaping (Date) -> Void) {
         _date = date
         self.minimumDate = minimumDate
         self.now = now
         self.onChange = onChange
     }
-    
+
     public var body: some View {
         HStack(alignment: .firstTextBaseline) {
             Group {
@@ -36,7 +34,7 @@ public struct MyDatePicker: View {
             }
             .datePickerStyle(CompactDatePickerStyle())
             .onChange(of: date, perform: onChange)
-            
+
             Group {
                 Button(action: { date = now }, label: {
                     Text("now")

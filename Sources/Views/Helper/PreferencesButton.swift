@@ -11,21 +11,20 @@
 import SwiftUI
 
 public struct PreferencesButton<Content>: View where Content: View {
-    
     var content: () -> Content
-    
+
     public init(content: @escaping () -> Content) {
         self.content = content
     }
-        
+
     public var body: some View {
         #if os(macOS)
-        Button(action: {
-            NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
-        }) {
-            content()
-        }
-        //.buttonStyle(BorderlessButtonStyle())
+            Button(action: {
+                NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
+            }) {
+                content()
+            }
+            // .buttonStyle(BorderlessButtonStyle())
         #endif
     }
 }

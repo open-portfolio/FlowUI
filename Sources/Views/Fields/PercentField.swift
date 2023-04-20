@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 import FlowBase
@@ -22,7 +21,8 @@ public struct PercentField: View {
     public init(_ placeholder: String = "",
                 value: Binding<Double>,
                 onEditingChanged: OnEditingChanged? = nil,
-                onCommit: OnCommit? = nil) {
+                onCommit: OnCommit? = nil)
+    {
         self.placeholder = placeholder
         _value = value
         self.onEditingChanged = onEditingChanged

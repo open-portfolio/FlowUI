@@ -10,8 +10,8 @@
 
 import Foundation
 
-extension UserDefaults {
-    public static func clear() {
+public extension UserDefaults {
+    static func clear() {
         if let bundleID = Bundle.main.bundleIdentifier {
             UserDefaults.standard.removePersistentDomain(forName: bundleID)
         }

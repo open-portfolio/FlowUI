@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 public enum AccentColor: Int, CaseIterable, Codable {
@@ -18,7 +17,7 @@ public enum AccentColor: Int, CaseIterable, Codable {
     case orange
     case yellow
     case green
-    
+
     var color: Color {
         switch self {
         case .blue:
@@ -38,13 +37,12 @@ public enum AccentColor: Int, CaseIterable, Codable {
 }
 
 public struct AccentPicker: View {
-    
     @Binding var selectedColor: AccentColor
-    
+
     public init(selectedColor: Binding<AccentColor>) {
         _selectedColor = selectedColor
     }
-    
+
     public var body: some View {
         HStack {
             ForEach(AccentColor.allCases, id: \.self) { accentColor in

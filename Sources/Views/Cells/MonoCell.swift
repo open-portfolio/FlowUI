@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 public struct MonoCell<Content: View>: View {
@@ -17,7 +16,7 @@ public struct MonoCell<Content: View>: View {
     public init(content: @escaping () -> Content) {
         self.content = content
     }
-    
+
     public var body: some View {
         VStack(spacing: 0) {
             content()
@@ -28,23 +27,22 @@ public struct MonoCell<Content: View>: View {
         .foregroundColor(fgColor)
         .background(bgColor.opacity(0.2))
     }
-    
+
     private var fgColor: Color {
         #if os(macOS)
-        //Color(.windowBackgroundColor)
-        Color(.controlTextColor)
+            // Color(.windowBackgroundColor)
+            Color(.controlTextColor)
         #else
-        Color.primary
+            Color.primary
         #endif
     }
-    
+
     private var bgColor: Color {
         #if os(macOS)
-        //Color(.windowBackgroundColor)
-        Color(.controlBackgroundColor)
+            // Color(.windowBackgroundColor)
+            Color(.controlBackgroundColor)
         #else
-        Color.secondary
+            Color.secondary
         #endif
     }
 }
-

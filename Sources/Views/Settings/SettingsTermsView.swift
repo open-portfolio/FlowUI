@@ -11,21 +11,20 @@
 import SwiftUI
 
 public struct SettingsTermsView: View {
-    
     @AppStorage(userAgreedTermsAtKey) var userAgreedTermsAt: String = ""
 
     public init() {}
-    
+
     @State private var updateToggle = false
     @State private var showTerms = false
-    
+
     static let dfShort: DateFormatter = {
         let df = DateFormatter()
         df.dateStyle = .short
         df.timeStyle = .short
         return df
     }()
-    
+
     static let isoDateFormatter = ISO8601DateFormatter()
 
     public var body: some View {
@@ -52,15 +51,15 @@ public struct SettingsTermsView: View {
             Button(action: { showTerms.toggle() }, label: {
                 Text("Review ‘Terms and Conditions’")
             })
-                .sheet(isPresented: $showTerms) {
-                    TermsView(showTerms: $showTerms, onUpdate: { updateToggle.toggle() })
-                }
-                .padding()
+            .sheet(isPresented: $showTerms) {
+                TermsView(showTerms: $showTerms, onUpdate: { updateToggle.toggle() })
+            }
+            .padding()
 
             Spacer()
         }
     }
-    
+
     private var formattedAgreedToTermsAt: String {
         guard let acceptedDate = SettingsTermsView.isoDateFormatter.date(from: userAgreedTermsAt)
         else { return "Invalid Date" }

@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 import AllocData
@@ -21,9 +20,9 @@ public struct InfoBanner: View {
     public let modelID: UUID
     public let accent: Color
     public var onDismiss: (() -> Void)?
-    
+
     // MARK: - Locals
-    
+
     @State private var isPresented = false
     @State private var schemaName: String = ""
     @State private var rejectedRows: [AllocRowed.DecodedRow] = []
@@ -33,7 +32,7 @@ public struct InfoBanner: View {
         self.accent = accent
         self.onDismiss = onDismiss
     }
-    
+
     public var body: some View {
         VStack(alignment: .leading) {
             HStack(alignment: .top) {
@@ -55,10 +54,10 @@ public struct InfoBanner: View {
                             .contextMenu(ContextMenu(menuItems: {
                                 Button("Copy", action: {
                                     let someText = msg.val
-                    #if os(macOS)
-                                    let pasteboard = NSPasteboard.general; pasteboard.declareTypes([.string], owner: nil); pasteboard.setString(someText, forType: .string)
-                    #endif
-                                    //UIPasteboard.general.string = someText
+                                    #if os(macOS)
+                                        let pasteboard = NSPasteboard.general; pasteboard.declareTypes([.string], owner: nil); pasteboard.setString(someText, forType: .string)
+                                    #endif
+                                    // UIPasteboard.general.string = someText
                                 })
                             }))
                         if msg.rejectedRows.count > 0 {
@@ -73,12 +72,12 @@ public struct InfoBanner: View {
                         }
                     }
                 }
-                  
+
                 DismissButton(onDismiss: dismissAction)
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(.top, 1) // TODO needed to avoid weird scrolling above sidebar
+        .padding(.top, 1) // TODO: needed to avoid weird scrolling above sidebar
         .padding(.horizontal, 40)
         .contentShape(Rectangle())
         .background(accent.opacity(0.1))
@@ -93,30 +92,30 @@ public struct InfoBanner: View {
                              schemaName: $schemaName,
                              rejectedRows: $rejectedRows,
                              onDismiss: { isPresented = false; rejectedRows = [] })
-            .padding()
+                .padding()
         }
     }
-    
+
     private var filteredMessages: [InfoMessageStore.Message] {
         infoMessageStore.messages(modelID: modelID)
     }
-    
+
     private var controlTextColor: Color {
         #if os(macOS)
-        Color(.controlTextColor)
+            Color(.controlTextColor)
         #else
-        Color.primary
+            Color.primary
         #endif
     }
-    
+
     private var windowBackgroundColor: Color {
         #if os(macOS)
-        Color(.windowBackgroundColor)
+            Color(.windowBackgroundColor)
         #else
-        Color.secondary
+            Color.secondary
         #endif
     }
-    
+
     private func dismissAction() {
         infoMessageStore.dismiss(modelID: modelID)
         onDismiss?()

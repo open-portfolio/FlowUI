@@ -15,8 +15,9 @@ public struct CheckmarkLabel: View {
     public init(_ value: Bool) {
         self.value = value
     }
+
     public var body: some View {
         Image(systemName: "checkmark").opacity(value ? 1 : 0)
-        //Image(systemName: value ? "checkmark.square" : "square")
+        // Image(systemName: value ? "checkmark.square" : "square")
     }
 }

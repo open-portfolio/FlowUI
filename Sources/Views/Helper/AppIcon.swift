@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 extension Bundle {
@@ -29,9 +28,8 @@ extension Bundle {
 }
 
 public struct AppIcon: View {
-    
     public init() {}
-    
+
     public var body: some View {
         #if os(iOS)
             Bundle.main.iconFileName

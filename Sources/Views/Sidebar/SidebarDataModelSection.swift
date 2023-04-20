@@ -34,7 +34,8 @@ public struct SidebarDataModelSection: View {
                 warningCounts: [String: Int],
                 showGainLoss: Bool,
                 warnMissingSharePrice: Bool,
-                auxTableViewInfos: [DataModelViewInfo] = []) {
+                auxTableViewInfos: [DataModelViewInfo] = [])
+    {
         _model = model
         self.ax = ax
         _activeSidebarMenuKey = activeSidebarMenuKey
@@ -45,24 +46,24 @@ public struct SidebarDataModelSection: View {
         self.warnMissingSharePrice = warnMissingSharePrice
         self.auxTableViewInfos = auxTableViewInfos
     }
-    
+
     public var body: some View {
-    
         // NOTE because of possible SwiftUI bug, making the header navigable
         NavigationLink(destination: Text(""),
                        tag: SidebarMenuIDs.dataModelHeader.rawValue,
-                       selection: $activeSidebarMenuKey) {
+                       selection: $activeSidebarMenuKey)
+        {
             SidebarHeaderLabel(title: "Data Model", letter: "M", fill: fill)
         }
 
         ForEach(tableViewInfos) { tvInfo in
             NavigationLink(destination: tvInfo.tableView,
                            tag: tvInfo.id,
-                           selection: $activeSidebarMenuKey) {
-                
+                           selection: $activeSidebarMenuKey)
+            {
                 HStack {
                     SidebarNumberedLabel(tvInfo.count, fill: fill) { Text(tvInfo.title) }
-                    
+
                     if let count = warningCounts[tvInfo.id] {
                         WarningIndicator(n: count)
                             .font(.title2)
@@ -71,22 +72,22 @@ public struct SidebarDataModelSection: View {
             }
         }
     }
-    
+
     private var tableViewInfos: [DataModelViewInfo] {
         var infos = [DataModelViewInfo]()
-        
+
         for x in baseModelEntities {
             infos.append(DataModelViewInfo(id: x.rawValue,
                                            tableView: getModelView(x),
                                            title: x.title,
                                            count: getModelCount(x)))
         }
-        
+
         infos.append(contentsOf: auxTableViewInfos)
-        
+
         return infos
     }
-    
+
     private func getModelView(_ menuID: SidebarMenuIDs) -> AnyView {
         switch menuID {
         case .modelStrategies:
@@ -107,7 +108,7 @@ public struct SidebarDataModelSection: View {
             return EmptyView().eraseToAnyView()
         }
     }
-    
+
     private func getModelCount(_ menuID: SidebarMenuIDs) -> Int {
         switch menuID {
         case .modelStrategies:
@@ -128,7 +129,7 @@ public struct SidebarDataModelSection: View {
             return 0
         }
     }
-    
+
     private var activeTickerKeys: SecurityKeySet {
         if ax.activeTickerKeySet.count > 0 {
             return ax.activeTickerKeySet

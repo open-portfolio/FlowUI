@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 public struct StatsBoxView<Content: View>: View {
@@ -16,7 +15,7 @@ public struct StatsBoxView<Content: View>: View {
     var content: () -> Content
 
     public init(title: String,
-         @ViewBuilder content: @escaping () -> Content)
+                @ViewBuilder content: @escaping () -> Content)
     {
         self.title = title
         self.content = content
@@ -39,7 +38,6 @@ public struct StatsBoxView<Content: View>: View {
 }
 
 public struct StatusDisplay<T>: View {
-    
     var title: String?
     var value: T
     var format: (T) -> String

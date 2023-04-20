@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
 import AllocData
@@ -19,9 +18,10 @@ public struct AssetIDPicker<Label>: View where Label: View {
     var assets: [MAsset]
     @Binding var assetID: AssetID
     var label: () -> Label
-    
+
     public init(assets: [MAsset], assetID: Binding<AssetID>,
-                @ViewBuilder label: @escaping () -> Label) {
+                @ViewBuilder label: @escaping () -> Label)
+    {
         self.assets = assets
         _assetID = assetID
         self.label = label

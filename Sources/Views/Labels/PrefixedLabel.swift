@@ -10,7 +10,6 @@
 import SwiftUI
 
 public struct PrefixedLabel<T, Prefix, Suffix>: View where Prefix: View, Suffix: View {
-    
     private var value: T
     private var width: CGFloat
     private var height: CGFloat
@@ -18,30 +17,31 @@ public struct PrefixedLabel<T, Prefix, Suffix>: View where Prefix: View, Suffix:
     private var prefixFormatter: (T) -> Prefix
     private var textStyle: Font.TextStyle
     private var suffixContent: () -> Suffix
-   
+
     public init(_ value: T,
                 width: CGFloat,
                 height: CGFloat,
                 fill: LinearGradient,
                 format: @escaping (T) -> Prefix,
                 textStyle: Font.TextStyle = .caption2,
-                content: @escaping () -> Suffix) {
+                content: @escaping () -> Suffix)
+    {
         self.value = value
         self.width = width
         self.height = height
         self.fill = fill
-        self.prefixFormatter = format
+        prefixFormatter = format
         self.textStyle = textStyle
-        self.suffixContent = content
+        suffixContent = content
     }
-    
+
     public var body: some View {
         HStack {
             prefix
             suffixContent()
         }
     }
-    
+
     private var prefix: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 3)
@@ -50,7 +50,7 @@ public struct PrefixedLabel<T, Prefix, Suffix>: View where Prefix: View, Suffix:
             prefixFormatter(value)
                 .font(.system(textStyle, design: .monospaced))
                 .lineLimit(1)
-                //.font(.caption)
+                // .font(.caption)
                 .foregroundColor(.white)
                 .shadow(radius: 1, x: 1, y: 1)
         }

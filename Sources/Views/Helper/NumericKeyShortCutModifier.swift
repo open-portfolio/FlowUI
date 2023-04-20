@@ -18,7 +18,7 @@ public struct NumericKeyShortCutModifier: ViewModifier {
         self.n = n
         self.modifiers = modifiers
     }
-    
+
     public func body(content: Content) -> some View {
         if (1 ... 9).contains(n) {
             content

@@ -17,7 +17,7 @@ public struct ColoredToggle<Label>: View
     var color: Color
     var enabled: Bool = true
     let label: () -> Label
-    
+
     public init(on: Binding<Bool>, color: Color, enabled: Bool = true, label: @escaping () -> Label) {
         _on = on
         self.color = color
@@ -39,7 +39,7 @@ public struct ColoredToggle<Label>: View
                 .padding(3)
             }
         })
-            .disabled(!enabled)
+        .disabled(!enabled)
     }
 }
 
@@ -59,24 +59,23 @@ public struct ColoredSystemImageToggle: View {
         self.enabled = enabled
         self.help = help
     }
-    
+
     public var body: some View {
         Toggle(isOn: $on, label: {
-                Image(systemName: on || !enabled ? systemImageNameOn : systemImageNameOff)
-                    .foregroundColor(enabled ? color.opacity(on ? 1.0 : 0.8) : disabledControlTextColor)
+            Image(systemName: on || !enabled ? systemImageNameOn : systemImageNameOff)
+                .foregroundColor(enabled ? color.opacity(on ? 1.0 : 0.8) : disabledControlTextColor)
         })
-            .help(help)
-            .disabled(!enabled)
-    }
-    
-    private var disabledControlTextColor: Color {
-        #if os(macOS)
-        Color(.disabledControlTextColor)
-        #else
-        Color.secondary
-        #endif
+        .help(help)
+        .disabled(!enabled)
     }
 
+    private var disabledControlTextColor: Color {
+        #if os(macOS)
+            Color(.disabledControlTextColor)
+        #else
+            Color.secondary
+        #endif
+    }
 }
 
 public struct InspectorToggle: View {
@@ -85,7 +84,7 @@ public struct InspectorToggle: View {
     public init(on: Binding<Bool>) {
         _on = on
     }
-    
+
     public var body: some View {
         Button(action: {
             on.toggle()
@@ -95,15 +94,14 @@ public struct InspectorToggle: View {
         }
         .help("Toggle Inspector")
     }
-    
+
     private var controlTextColor: Color {
         #if os(macOS)
-        Color(.controlTextColor)
+            Color(.controlTextColor)
         #else
-        Color.primary
+            Color.primary
         #endif
     }
-
 }
 
 // struct ColoredToggle_Previews: PreviewProvider {

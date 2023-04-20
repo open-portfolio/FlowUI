@@ -8,14 +8,13 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import Foundation
-
 
 public func getFileCreationDate(_ url: URL?) -> Date? {
     if let _url = url,
        _url.isFileURL,
-       let attributes = try? FileManager.default.attributesOfItem(atPath: _url.path) as [FileAttributeKey: Any] {
+       let attributes = try? FileManager.default.attributesOfItem(atPath: _url.path) as [FileAttributeKey: Any]
+    {
         return attributes[FileAttributeKey.creationDate] as? Date
     }
     return nil

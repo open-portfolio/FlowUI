@@ -15,14 +15,13 @@ import AllocData
 import FlowBase
 import FlowViz
 struct StrategyNavPicker<HS>: View where HS: View {
-    
     let strategySummary: (MStrategy) -> HS
     @Binding var model: BaseModel
     var ax: BaseContext
     var assetColorMap: AssetColorMap
     @Binding var activeStrategyKey: MStrategy.Key
     @Binding var activeSidebarMenuKey: String?
-    var assetValues: [AssetValue]    // endPositions for FlowWorth; surge-calculated for FlowAllocator
+    var assetValues: [AssetValue] // endPositions for FlowWorth; surge-calculated for FlowAllocator
     var strategies: [MStrategy]
 
     var body: some View {
@@ -47,15 +46,15 @@ struct StrategyNavPicker<HS>: View where HS: View {
     private var cell: some View {
         VStack {
             KeyedPickerTitled(elements: model.strategies.sorted(),
-                        key: $activeStrategyKey)
+                              key: $activeStrategyKey)
             { Text(strategyTitle) }
                 .modify {
                     #if os(macOS)
-                    $0.pickerStyle(DefaultPickerStyle())
-                        .labelsHidden()
+                        $0.pickerStyle(DefaultPickerStyle())
+                            .labelsHidden()
                     #else
-                    $0.pickerStyle(MenuPickerStyle())
-                        .foregroundColor(.primary) // to contrast with the background accent color when selected
+                        $0.pickerStyle(MenuPickerStyle())
+                            .foregroundColor(.primary) // to contrast with the background accent color when selected
                     #endif
                 }
 
@@ -70,7 +69,7 @@ struct StrategyNavPicker<HS>: View where HS: View {
                 .shadow(radius: 1, x: 2, y: 2)
         }
     }
-    
+
     // MARK: - Helpers
 
     private var strategyTitle: String {

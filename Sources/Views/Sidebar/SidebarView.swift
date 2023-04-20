@@ -8,10 +8,9 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 //
 
-
 import SwiftUI
 
-//import KeyWindow
+// import KeyWindow
 
 import AllocData
 
@@ -104,7 +103,8 @@ public struct SidebarView<THS, NHS, SS, AS, TC, BC>: View where THS: View, NHS: 
                 activeStrategyKey: Binding<MStrategy.Key>,
                 activeSidebarMenuKey: Binding<String?>,
                 strategyAssetValues: [AssetValue],
-                fetchAssetValues: @escaping FetchAssetValues) {
+                fetchAssetValues: @escaping FetchAssetValues)
+    {
         self.topContent = topContent
         self.bottomContent = bottomContent
         self.tradingHoldingsSummary = tradingHoldingsSummary
@@ -120,20 +120,20 @@ public struct SidebarView<THS, NHS, SS, AS, TC, BC>: View where THS: View, NHS: 
         self.strategyAssetValues = strategyAssetValues
         self.fetchAssetValues = fetchAssetValues
     }
-    
+
     // MARK: - Locals
 
     public var body: some View {
         List {
             topContent
-            
+
             SidebarHeaderLabel(title: "Strategy",
                                letter: "S", fill: fill)
                 .contentShape(Rectangle()) // to ensure taps work in empty space
                 .onTapGesture {
                     activeSidebarMenuKey = SidebarMenuIDs.activeStrategy.rawValue
                 }
-            
+
             StrategyNavPicker(strategySummary: strategySummary,
                               model: $model,
                               ax: ax,
@@ -142,73 +142,75 @@ public struct SidebarView<THS, NHS, SS, AS, TC, BC>: View where THS: View, NHS: 
                               activeSidebarMenuKey: $activeSidebarMenuKey,
                               assetValues: strategyAssetValues,
                               strategies: model.strategies)
-            
+
             spacer(.spacer0)
-            
+
             if tradingAccounts.count > 0 {
                 NavigationLink(
                     destination: tradingHoldingsSummary,
                     tag: SidebarMenuIDs.tradingAccountsSummary.rawValue,
-                    selection: $activeSidebarMenuKey) {
-                        SidebarHeaderLabel(title: "Trading Accounts",
-                                           letter: "T", fill: fill)
-                    }
-                
+                    selection: $activeSidebarMenuKey
+                ) {
+                    SidebarHeaderLabel(title: "Trading Accounts",
+                                       letter: "T", fill: fill)
+                }
+
                 SidebarAccountsView(accountSummary: accountSummary,
                                     assetColorMap: assetColorMap,
                                     fetchAssetValues: fetchAssetValues,
                                     accounts: tradingAccounts,
                                     activeSidebarMenuKey: $activeSidebarMenuKey)
-                
+
                 spacer(.spacer1)
             }
-            
+
             if nonTradingAccounts.count > 0 {
                 NavigationLink(
                     destination: nonTradingHoldingsSummary,
                     tag: SidebarMenuIDs.nonTradingAccountsSummary.rawValue,
-                    selection: $activeSidebarMenuKey) {
-                        SidebarHeaderLabel(title: "Non-Trading Accounts",
-                                           letter: "N", fill: fill)
-                    }
-            
+                    selection: $activeSidebarMenuKey
+                ) {
+                    SidebarHeaderLabel(title: "Non-Trading Accounts",
+                                       letter: "N", fill: fill)
+                }
+
                 SidebarAccountsView(accountSummary: accountSummary,
                                     assetColorMap: assetColorMap,
                                     fetchAssetValues: fetchAssetValues,
                                     accounts: nonTradingAccounts,
                                     activeSidebarMenuKey: $activeSidebarMenuKey)
-                
+
                 spacer(.spacer2)
             }
-            
+
             bottomContent
         }
         .listStyle(SidebarListStyle())
     }
 
     private func spacer(_ menuID: SidebarMenuIDs) -> some View {
-        
         // NOTE because of possible SwiftUI bug, making the spacer navigable
         NavigationLink(destination: Text(""), // WelcomeView() { GettingStarted(document: $document) },
                        tag: menuID.rawValue,
-                       selection: $activeSidebarMenuKey) {
+                       selection: $activeSidebarMenuKey)
+        {
             Spacer()
         }
     }
-    
+
     // MARK: - Properties
-    
+
     private var tradingAccounts: [MAccount] {
         let accounts = activeStrategyKey.isValid
-        ? ax.strategyVariableAccountsMap[activeStrategyKey] ?? []
-        : ax.variableAccounts
+            ? ax.strategyVariableAccountsMap[activeStrategyKey] ?? []
+            : ax.variableAccounts
         return accounts
     }
-    
+
     private var nonTradingAccounts: [MAccount] {
         let accounts = activeStrategyKey.isValid
-        ? ax.strategyFixedAccountsMap[activeStrategyKey] ?? []
-        : ax.fixedAccounts
+            ? ax.strategyFixedAccountsMap[activeStrategyKey] ?? []
+            : ax.fixedAccounts
         return accounts
     }
 }
