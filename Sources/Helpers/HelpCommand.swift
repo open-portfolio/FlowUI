@@ -19,19 +19,19 @@ public struct HelpCommand: View {
         Divider()
 
         Button(action: {
-            openURL(URL(string: "https://openalloc.github.io/privacy/")!)
+            openURL(URL(string: "https://open-portfolio.github.io/privacy")!)
         }, label: {
             Text("Privacy Policy")
         })
 
         Button(action: {
-            openURL(URL(string: "https://openalloc.github.io/support/")!)
+            openURL(URL(string: "https://open-portfolio.github.io/support")!)
         }, label: {
             Text("Support")
         })
 
         Button(action: {
-            openURL(URL(string: "https://openalloc.github.io/terms/")!)
+            openURL(URL(string: "https://open-portfolio.github.io/terms")!)
         }, label: {
             Text("Terms & Conditions")
         })
