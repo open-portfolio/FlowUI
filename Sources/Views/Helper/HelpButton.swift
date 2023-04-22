@@ -30,9 +30,10 @@ public struct HelpButton: View {
         .buttonStyle(BorderlessButtonStyle())
     }
 
-    // https://openalloc.github.io/allocator/holdingsParticipation/index.html
+    // OLD https://open-portfolio.github.io/allocator/holdingsParticipation/index.html
+    // NEW https://open-portfolio.github.io/allocator/holdingsParticipation
     private var url: URL {
-        URL(string: "https://openalloc.github.io/\(appName)/\(topicName)/index.html")!
+        URL(string: "https://open-portfolio.github.io/\(appName)/\(topicName)")!
     }
 
     private var buttonLook: some View {
