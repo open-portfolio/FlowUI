@@ -26,7 +26,6 @@ let package = Package(
         .package(url: "https://github.com/openalloc/SwiftTabler", from: "0.5.0"),
         .package(url: "https://github.com/openalloc/SwiftSideways", from: "0.5.0"),
         .package(url: "https://github.com/openalloc/SwiftCompactor", from: "1.0.0"),
-        .package(url: "https://github.com/reedes/KeyWindow", from: "0.0.4"),
         .package(url: "https://github.com/reedes/ZIPFoundation", from: "0.9.0"),
     ],
     targets: [
@@ -41,7 +40,6 @@ let package = Package(
                 .product(name: "Tabler", package: "SwiftTabler"),
                 .product(name: "Sideways", package: "SwiftSideways"),
                 .product(name: "Compactor", package: "SwiftCompactor"),
-                .product(name: "KeyWindow", package: "KeyWindow"),
             ],
             path: "Sources"
         ),

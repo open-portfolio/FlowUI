@@ -11,7 +11,6 @@
 import SwiftUI
 
 import AllocData
-import KeyWindow
 
 public func getBaseDataModelViewCommand(_ baseModelEntities: [SidebarMenuIDs]) -> [DataModelViewCommand] {
     baseModelEntities.map { menuID in
