@@ -21,7 +21,7 @@ struct StrategyNavPicker<HS>: View where HS: View {
     var assetColorMap: AssetColorMap
     @Binding var activeStrategyKey: MStrategy.Key
     @Binding var activeSidebarMenuKey: String?
-    var assetValues: [AssetValue] // endPositions for FlowWorth; surge-calculated for FlowAllocator
+    var assetValues: [AssetValue] // endPositions for Flow Worth; surge-calculated for Flow Allocator
     var strategies: [MStrategy]
 
     var body: some View {
