@@ -23,7 +23,7 @@ public enum SidebarMenuIDs: String, CaseIterable {
     case modelAccounts = "B0564B17-B0DE-4D6C-8343-CCCB94BCE092"
     case modelAssets = "B0564B17-B0DE-4D6C-8343-CCCB94BCE093"
     case modelSecurities = "B0564B17-B0DE-4D6C-8343-CCCB94BCE094"
-    case modelTrackers = "B0564B17-B0DE-4D6C-8343-CCCB94BCE095"
+//    case modelTrackers = "B0564B17-B0DE-4D6C-8343-CCCB94BCE095"
     case modelHoldings = "4194E211-CCD8-4C45-ABBF-549C52D6A120"
     case modelTxns = "B0564B17-B0DE-4D6C-8343-CCCB94BCE096"
 //    case modelValuationSnapshots = "98363443-B922-4C00-84AC-F04173D4D03C"
@@ -52,8 +52,8 @@ public enum SidebarMenuIDs: String, CaseIterable {
             return "Assets"
         case .modelSecurities:
             return "Securities"
-        case .modelTrackers:
-            return "Trackers"
+//        case .modelTrackers:
+//            return "Trackers"
         case .modelHoldings:
             return "Holdings"
         case .modelTxns:

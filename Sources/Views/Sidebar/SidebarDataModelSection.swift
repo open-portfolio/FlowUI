@@ -98,8 +98,8 @@ public struct SidebarDataModelSection: View {
             return AssetTable(model: $model, ax: ax).eraseToAnyView()
         case .modelSecurities:
             return SecurityTable(model: $model, ax: ax, activeTickerKeys: activeTickerKeys).eraseToAnyView()
-        case .modelTrackers:
-            return TrackerTable(model: $model, ax: ax).eraseToAnyView()
+//        case .modelTrackers:
+//            return TrackerTable(model: $model, ax: ax).eraseToAnyView()
         case .modelHoldings:
             return HoldingTable(model: $model, ax: ax, account: nil).eraseToAnyView()
         case .modelTxns:
@@ -119,8 +119,8 @@ public struct SidebarDataModelSection: View {
             return model.assets.count
         case .modelSecurities:
             return model.securities.count
-        case .modelTrackers:
-            return model.trackers.count
+//        case .modelTrackers:
+//            return model.trackers.count
         case .modelHoldings:
             return model.holdings.count
         case .modelTxns:

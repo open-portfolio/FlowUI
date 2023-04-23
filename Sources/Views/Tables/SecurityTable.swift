@@ -63,9 +63,9 @@ public struct SecurityTable: View {
             Sort.columnTitle("Updated At", ctx, \.updatedAt)
                 .onTapGesture { tablerSort(ctx, &model.securities, \.updatedAt) { ($0.updatedAt ?? Date.distantPast) < ($1.updatedAt ?? Date.distantPast) } }
                 .modifier(HeaderCell())
-            Sort.columnTitle("Index Tracker", ctx, \.trackerID)
-                .onTapGesture { tablerSort(ctx, &model.securities, \.trackerID) { $0.trackerKey < $1.trackerKey } }
-                .modifier(HeaderCell())
+//            Sort.columnTitle("Index Tracker", ctx, \.trackerID)
+//                .onTapGesture { tablerSort(ctx, &model.securities, \.trackerID) { $0.trackerKey < $1.trackerKey } }
+//                .modifier(HeaderCell())
         }
     }
 
@@ -81,8 +81,8 @@ public struct SecurityTable: View {
                 .modifier(MissingDataModifier(isSharePriceMissing(element)))
             DateLabel(element.updatedAt, withTime: true)
                 .mpadding()
-            TrackerTitleLabel(model: model, ax: ax, trackerKey: element.trackerKey, withID: true)
-                .mpadding()
+//            TrackerTitleLabel(model: model, ax: ax, trackerKey: element.trackerKey, withID: true)
+//                .mpadding()
         }
         .modifier(EditDetailerContextMenu(element, onDelete: deleteAction, onEdit: { toEdit = $0 }))
     }
@@ -116,9 +116,9 @@ public struct SecurityTable: View {
                           selection: element.updatedAt,
                           displayedComponents: [.date, .hourAndMinute])
 
-            TrackerIDPicker(trackers: model.trackers.sorted(), trackerID: element.trackerID) {
-                Text("Tracking Index")
-            }
+//            TrackerIDPicker(trackers: model.trackers.sorted(), trackerID: element.trackerID) {
+//                Text("Tracking Index")
+//            }
         }
     }
 
